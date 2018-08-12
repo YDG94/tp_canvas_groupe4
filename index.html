@@ -1,10 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
-        
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>CHOOSE YOUR OWN LIFESTYLE</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="style/css.css">
+</head>
+<body>
+
+<header>
+
+</header>
+
+<main>
+    <section id="left_section">
+
+        <h3>Choose an element to add.</h3>
+
+        <input type="text" name="searchElement" id="searchElement" placeholder="Search for an element..."/>
+
+        <select id="catElement" name="catElement">
+            <option selected value="0">All elements</option>
+        </select>
+
+        <div id="svgContent">
+            <svg>
+                <!--svg elements....-->
+            </svg>
+        </div>
+
+    </section>
+
+    <section id="center_section">
+        <!--upload plan photo-->
+        <div id="plan">
+            <!--drag and drop svg elements-->
+        </div>
+
+    </section>
+
+    <section id="right_section">
+
+        <h3>List of project</h3>
+
+        <div id="manageProject"></div>
+
+        <div id="projectTree">
+            <!--upload project tree from js -->
+        </div>
+
+        <h3>Elements properties</h3>
+
+        <div id="elemPropertie"></div>
+
+    </section>
+</main>
+<script src="script/jquery.js"></script>
+<script src="script/main.js"></script>
+</body>
 </html>

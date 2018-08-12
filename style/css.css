@@ -1,0 +1,112 @@
+* {
+    color: #cdcdcd;
+    font-size: 18px;
+    font-family: "Comic Sans MS";
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #373737;
+    overflow-y: hidden;
+}
+
+header {
+    height: 70px;
+    opacity: 0.5;
+    margin: 15px;
+    -webkit-box-shadow: 0 0 160px -15px rgba(65,171,239,1);
+    -moz-box-shadow: 0 0 160px -15px rgba(65,171,239,1);
+    box-shadow: 0 0 160px -15px rgba(65,171,239,1);
+}
+
+main {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding: 0 15px 15px 15px;
+}
+
+#left_section {
+    flex: 1;
+    padding: 15px;
+    margin-right: 15px;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+}
+
+#right_section {
+    flex: 1;
+    padding: 15px;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+}
+
+#center_section {
+    flex: 4;
+    width: 60%;
+    height: 100%;
+    margin-right: 15px;
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+
+}
+
+#searchElement {
+    width: 96%;
+    border-radius: 20px;
+    padding: 5px 35px 5px 10px;
+    background: url("../image/search.png") no-repeat 98% #FFF;
+    background-size: 28px;
+}
+
+#catElement {
+    width: 96%;
+    border-radius: 20px;
+    padding: 5px 35px 5px 10px;
+    margin-top: 25px;
+    color: #373737;
+}
+
+#svgContent {
+    display: inline-block;
+    margin-top: 25px;
+    width: 96%;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+#svgContent > svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+#plan{
+    width: 100%;
+    height: 100%;
+}
+
+#manageProject{
+    height: 50px;
+}
+
+#projectTree{
+    height: 49%;
+    overflow-y: auto;
+}
+
+#elemPropertie{
+    height: 29%;
+    overflow-y: auto;
+}
