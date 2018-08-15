@@ -29,7 +29,7 @@ main {
 
 #left_section {
     flex: 1;
-    padding: 15px;
+    padding: 20px;
     margin-right: 15px;
     width: 20%;
     height: 100%;
@@ -41,7 +41,7 @@ main {
 
 #right_section {
     flex: 1;
-    padding: 15px;
+    padding: 20px;
     width: 20%;
     height: 100%;
     text-align: center;
@@ -63,7 +63,6 @@ main {
 
 #searchElement {
     width: 96%;
-    border-radius: 20px;
     padding: 5px 35px 5px 10px;
     background: url("../image/search.png") no-repeat 98% #FFF;
     background-size: 28px;
@@ -71,7 +70,6 @@ main {
 
 #catElement {
     width: 96%;
-    border-radius: 20px;
     padding: 5px 35px 5px 10px;
     margin-top: 25px;
     color: #373737;
@@ -81,8 +79,8 @@ main {
     display: inline-block;
     margin-top: 25px;
     width: 96%;
+    height: 77%;
     background-color: #FFFFFF;
-    border-radius: 20px;
     overflow-y: auto;
 }
 
@@ -93,20 +91,31 @@ main {
 }
 
 #plan{
+    margin: 1.5% auto;
+    width: 96%;
+    height: 96%;
+    background-color: white;
+}
+
+#plan>svg{
     width: 100%;
     height: 100%;
 }
 
 #manageProject{
-    height: 50px;
+    height: 40px;
+    background-color: WHITE;
+    margin-bottom: 20px;
 }
 
 #projectTree{
     height: 49%;
     overflow-y: auto;
+    background: white;
 }
 
 #elemPropertie{
     height: 29%;
     overflow-y: auto;
+    background: white;
 }
