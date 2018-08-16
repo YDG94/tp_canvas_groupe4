@@ -37,7 +37,6 @@ main {
     -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
     -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
     box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    overflow-y: scroll
 }
 
 #right_section {
@@ -76,12 +75,12 @@ main {
     color: #373737;
 }
 
-#svgContent {
+#divSvg {
     display: inline-block;
     margin-top: 25px;
     width: 96%;
     background-color: #FFFFFF;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 #svgContent > svg {
@@ -115,8 +114,7 @@ main {
     background: white;
 }
 
-#elemPropertie{
-    height: 25%;
+#elem_prop{
     overflow-y: auto;
     background: white;
 }

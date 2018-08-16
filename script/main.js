@@ -20,7 +20,6 @@ if (SVG.supported) {
         }
         leftSVGList.size("100%",`${myItems.length*15}vh`);
         myLeftDivSVG.height= `${myItems.length*15}vh`;
-
     });
 
 
