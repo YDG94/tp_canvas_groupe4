@@ -1,5 +1,3 @@
-"use strict";
-
 export class SvgElement {
     constructor(elemId, elemName, elemDom, versId) {
         this.elemId = elemId;
