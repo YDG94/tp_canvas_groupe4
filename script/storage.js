@@ -1,29 +1,20 @@
 "use strict";
-/*
-let btn_save=document.querySelector('#btn_save');
-let draw=SVG('container').size(300,300);
-let circle=draw.rect(100,100).move(100,50).fill('salmon');
 
-function save() {
-    localStorage.plan=JSON.stringify(document.querySelector('#container').innerHTML);
+function save(nom_plan) {
+    localStorage.setItem(nom_plan,JSON.stringify(document.querySelector('#plan').innerHTML));
 }
 
-function deleteSave() {
-    localStorage.removeItem('plan');
+function deleteSave(nom_plan) {
+    localStorage.removeItem(nom_plan);
 }
 
-function creerSVG() {
-    let plan_loaded=SVG('#destination');
-}
-
-function getSave() {
-    let myPlan_json=localStorage.plan;
+function getSave(nom_plan) {
+    let myPlan_json=localStorage.getItem(nom_plan);
     if (myPlan_json!==null){
 
         console.log(JSON.parse(myPlan_json));
-        document.querySelector('#destination').innerHTML=JSON.parse(myPlan_json);
+        document.querySelector('#plan').innerHTML=JSON.parse(myPlan_json);
     } else{
-        document.querySelector('#destination').innerHTML="<p>Aucun plan n'a été chargé.</p>";
+        document.querySelector('#plan').innerHTML="<p>Aucun plan n'a été chargé.</p>";
     }
 }
-*/
