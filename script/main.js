@@ -5,6 +5,8 @@ console.log("js loaded");
 let myLeftDivSVG = document.querySelector("#svgContent");
 let leftSVGList = null;
 let planSVG = null;
+let centerImages=null;
+let leftImages=null;
 
 let tabElementsSvg = svgItems;
 
@@ -35,26 +37,11 @@ if (SVG.supported) {
         leftSVGList.size("100%", `${tabElementsSvg.length * 15}vh`);
         myLeftDivSVG.height = `${tabElementsSvg.length * 15}vh`;
 
-
         //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
         //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
 
-        //select all images from left list and put them in an array
-        let leftImages = leftSVGList.select('image');
-
-        //add listener on click on all images of the list (list itself)
-        leftImages.on("click", function (event) {
-            //the image will be created and is chained to animation
-            planSVG.image(this.attr("href"), "2vh", "2vh").attr({
-                'x': 0
-                , 'y': '50%'
-            }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
-
-            //we'll immediately get all images and we'll make it DRAGGABLE!
-        let centerImages = planSVG.select('image');
-        console.log(centerImages);
-        centerImages.draggable();
-        });
+         //add insert function !! DO NOT FORGET!!!
+        insertFunction();
 
     });
 } else {
@@ -107,6 +94,7 @@ categories.addEventListener("change", function (evt) {
     }
     leftSVGList.size("100%", `${tabElementsSvg.length * 15}vh`);
     myLeftDivSVG.height = `${tabElementsSvg.length * 15}vh`;
+    insertFunction();
 });
 
 let search  = document.getElementById("searchElement");
@@ -129,5 +117,25 @@ search.addEventListener("input", function () {
     }
     leftSVGList.size("100%", `${tabRes.length * 15}vh`);
     myLeftDivSVG.height = `${tabRes.length * 15}vh`;
-
+    insertFunction();
 });
+
+// ****  INSERT FUNCTION **** //
+let insertFunction = function(){
+    //select all images from left list and put them in an array
+    leftImages = leftSVGList.select('image');
+    //add listener on click on all images of the list (list itself)
+    leftImages.on("click", function (event) {
+        //the image will be created and is chained to animation
+        planSVG.image(this.attr("href"), "2vh", "2vh").attr({
+            'x': 0
+            , 'y': '50%'
+        }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
+
+        //we'll immediately get all images and we'll make it DRAGGABLE!
+        centerImages = planSVG.select('image');
+        console.log(centerImages);
+        centerImages.draggable();
+    });
+
+};
