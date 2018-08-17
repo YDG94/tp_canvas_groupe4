@@ -217,6 +217,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 .btn_icon{
     flex: 1;
+    cursor: pointer;
 }
 
 .btn_icon>img{
