@@ -50,7 +50,12 @@ if (SVG.supported) {
                 , 'y': '50%'
             }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
 
+            //we'll immediately get all images and we'll make it DRAGGABLE!
+        let centerImages = planSVG.select('image');
+        console.log(centerImages);
+        centerImages.draggable();
         });
+
     });
 } else {
     alert('SVG not supported');
