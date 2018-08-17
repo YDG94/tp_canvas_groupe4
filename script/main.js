@@ -12,7 +12,7 @@ let leftSVGList = null;
 let planSVG = null;
 let centerImages=null;
 let leftImages=null;
-
+const imgSize = 15;
 let tabElementsSvg = svgItems;
 
 
@@ -37,10 +37,10 @@ if (SVG.supported) {
         planSVG = SVG('plan');
 
         for (let i = 0; i < tabElementsSvg.length; i++) {
-            leftSVGList.image(`images/${tabElementsSvg[i].imgSrc}`, "100%", "15vh").move(0, `${15 * i}vh`);
+            leftSVGList.image(`images/${tabElementsSvg[i].imgSrc}`, "100%", `${imgSize}vh`).move(0, `${imgSize * i}vh`);
         }
-        leftSVGList.size("100%", `${tabElementsSvg.length * 15}vh`);
-        myLeftDivSVG.height = `${tabElementsSvg.length * 15}vh`;
+        leftSVGList.size("100%", `${tabElementsSvg.length * imgSize}vh`);
+        myLeftDivSVG.height = `${tabElementsSvg.length * imgSize}vh`;
 
         //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
         //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
@@ -155,7 +155,10 @@ let insertFunction = function(){
 //*** magic function for ROTATIION ***
 let trasformationFunction = function (setArrayOfImages) {
     setArrayOfImages.on("click", function (event) {
+
+       // var rect = planSVG.rect(100, 100).stroke('#f06');
         console.log(this);
+        this.addClass('test');
         let _this = this;
         let resetWidth = _this.attr("width");
         let resetHeight = _this.attr("height");
@@ -170,18 +173,8 @@ let trasformationFunction = function (setArrayOfImages) {
         });
         zoomSliderSVG.on("input", function (event) {
             let scale = event.target.value;
-
-            /*reset necessaire a chaque input sinon l'image va
-             grandir a l'infinit!*/
-            let width = resetWidth;
-            let height = resetHeight;
-            //slice necessaire pour garder le proportion en 'vh' et 'vw'
-            let isolateWidth = width.slice(0, -2);
-            let isolateHeight = height.slice(0, -2);
             //calculate new scale and apply!
-            let newWidth = isolateWidth*scale;
-            let newHeight = isolateHeight*scale;
-            _this.size(newWidth+"vh", newHeight+"vh");
+            _this.size(scale+"vh", scale+"vh");
         })
     });
 };
