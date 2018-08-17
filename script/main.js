@@ -156,12 +156,10 @@ let insertFunction = function(){
 let trasformationFunction = function (setArrayOfImages) {
     setArrayOfImages.on("click", function (event) {
 
-       // var rect = planSVG.rect(100, 100).stroke('#f06');
-        console.log(this);
-        this.addClass('test');
+        console.log(this.attr("x"));
+
+        //rect.move('5%', 0);
         let _this = this;
-        let resetWidth = _this.attr("width");
-        let resetHeight = _this.attr("height");
         /* il faut debrancher le listener pour input sur tous les images
          pour le rebrancher seulment sur le "this" de ce click-ci */
         rotationSliderSVG.off("input");
