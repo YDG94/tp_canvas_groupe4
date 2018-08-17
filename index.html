@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>CHOOSE YOUR OWN LIFESTYLE</title>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-
     <link rel="stylesheet" href="style/css.css">
 </head>
 <body>
@@ -34,9 +32,7 @@
     <section id="center_section">
         <!--upload plan photo-->
         <div id="plan">
-            <svg>
-                <!--drag and drop svg elements-->
-            </svg>
+
         </div>
 
     </section>
@@ -53,12 +49,22 @@
 
         <h3>Elements properties</h3>
 
-        <div id="elem_prop"></div>
+        <div id="elem_prop">
+            <label for="sizeController">size</label>
+            <input type="range" min="1" max="3" value="1" id="sizeController" step="0.1"/>
+
+            <label for="degreeController">rotation</label>
+            <input type="range" min="0" max="360" value="0" id="degreeController" step="10"/>
+
+        </div>
 
     </section>
 </main>
+
 <script src="script/jquery.js"></script>
+<script src="script/jquery.min.js"></script>
 <script src="script/svg.js"></script>
+<script src="script/svg.draggable.js"></script>
 <script type="module" src="script/main.js"></script>
 </body>
 </html>
