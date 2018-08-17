@@ -3,6 +3,11 @@ import {svgItems, tabCategories, Project, Version, SvgElement} from './struct.js
 
 console.log("js loaded");
 let myLeftDivSVG = document.querySelector("#svgContent");
+let rotationSliderDOM = document.querySelector("#degreeController");
+let zoomSliderDom = document.querySelector("#sizeController");
+//SVG.js peut adopter un element du DOM !!!
+let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
+let zoomSliderSVG = SVG.adopt(zoomSliderDom);
 let leftSVGList = null;
 let planSVG = null;
 let centerImages=null;
@@ -40,7 +45,7 @@ if (SVG.supported) {
         //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
         //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
 
-         //add insert function !! DO NOT FORGET!!!
+         //insert function with animation and DRAGGABLE ! =P
         insertFunction();
 
     });
@@ -136,6 +141,42 @@ let insertFunction = function(){
         centerImages = planSVG.select('image');
         console.log(centerImages);
         centerImages.draggable();
+        //voir rotate function plus en bas pur le details!
+        trasformationFunction(centerImages);
     });
-
 };
+
+//*** magic function for ROTATIION ***
+let trasformationFunction = function (setArrayOfImages) {
+    setArrayOfImages.on("click", function (event) {
+        console.log(this);
+        let _this = this;
+        let resetWidth = _this.attr("width");
+        let resetHeight = _this.attr("height");
+        /* il faut debrancher le listener pour input sur tous les images
+         pour le rebrancher seulment sur le "this" de ce click-ci */
+        rotationSliderSVG.off("input");
+        zoomSliderSVG.off("input");
+        rotationSliderSVG.on("input", function (event) {
+            let myDegree = event.target.value;
+            console.log(myDegree);
+            _this.rotate(myDegree);
+        });
+        zoomSliderSVG.on("input", function (event) {
+            let scale = event.target.value;
+
+            /*reset necessaire a chaque input sinon l'image va
+             grandir a l'infinit!*/
+            let width = resetWidth;
+            let height = resetHeight;
+            //slice necessaire pour garder le proportion en 'vh' et 'vw'
+            let isolateWidth = width.slice(0, -2);
+            let isolateHeight = height.slice(0, -2);
+            //calculate new scale and apply!
+            let newWidth = isolateWidth*scale;
+            let newHeight = isolateHeight*scale;
+            _this.size(newWidth+"vh", newHeight+"vh");
+        })
+    });
+};
+
