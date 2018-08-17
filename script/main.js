@@ -44,8 +44,12 @@ if (SVG.supported) {
 
         //add listener on click on all images of the list (list itself)
         leftImages.on("click", function (event) {
-            console.log(this.attr("href"));
-            let myImg = planSVG.image(this.attr("href"), "2vh", "2vh").animate(1000).scale(3, 3);
+            //the image will be created and is chained to animation
+            planSVG.image(this.attr("href"), "2vh", "2vh").attr({
+                'x': 0
+                , 'y': '50%'
+            }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
+
         });
     });
 } else {
