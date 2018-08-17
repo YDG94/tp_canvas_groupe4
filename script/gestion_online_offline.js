@@ -23,3 +23,5 @@ window.addEventListener("offline",updateOnlineStatus);
 document.addEventListener("DOMContentLoaded",function (evt) {
     updateOnlineStatus(evt);
 });
+
+// essai git
