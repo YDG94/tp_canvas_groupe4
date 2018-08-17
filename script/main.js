@@ -156,8 +156,15 @@ let insertFunction = function(){
 let trasformationFunction = function (setArrayOfImages) {
     setArrayOfImages.on("click", function (event) {
 
-        console.log(this.attr("x"));
+        setArrayOfImages.each(function(i) {
+            this.unfilter();
+        });
 
+        this.filter(function(add) {
+            let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
+
+            add.blend(add.source, blur);
+        });
         //rect.move('5%', 0);
         let _this = this;
         /* il faut debrancher le listener pour input sur tous les images
