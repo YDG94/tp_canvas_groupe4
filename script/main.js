@@ -142,9 +142,9 @@ let insertFunction = function(){
         console.log(centerImages);
         centerImages.draggable({
             minX: 20
-            , minY: 280
-            , maxX: window.innerWidth*20.5/100
-            , maxY: window.innerHeight - 400
+            , minY: window.innerHeight * 30 /100
+            , maxX: window.innerWidth * 20.5/100
+            , maxY: window.innerHeight * 58/100
             , snapToGrid: 5
         });
         //voir rotate function plus en bas pur le details!
