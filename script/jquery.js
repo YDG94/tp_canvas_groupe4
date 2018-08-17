@@ -7,3 +7,10 @@ $(window).load(function () {
     var He = sH - divHP - 330;
     $('#elem_prop').css('height', (He) + 'px');
 });
+
+$(document).ready(function () {
+        $("#upload_link").click(function(e){
+            e.preventDefault();
+            $("#upload:hidden").trigger('click');
+        });
+});
