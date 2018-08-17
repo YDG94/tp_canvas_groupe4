@@ -141,7 +141,7 @@ let insertFunction = function(){
         centerImages = planSVG.select('image');
         console.log(centerImages);
         centerImages.draggable({
-            minX: 20
+              minX: 20
             , minY: window.innerHeight * 30 /100
             , maxX: window.innerWidth * 20.5/100
             , maxY: window.innerHeight * 58/100
