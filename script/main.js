@@ -4,11 +4,10 @@ import {svgItems, tabCategories, Project, Version, SvgElement} from './struct.js
 console.log("js loaded");
 let myLeftDivSVG = document.querySelector("#svgContent");
 let leftSVGList = null;
+let planSVG = null;
+
 let tabElementsSvg = svgItems;
-//testing click on left list
-myLeftDivSVG.addEventListener("click", function (evt) {
-    console.log(evt.target);
-});
+
 
 let categories = document.querySelector("#catElement");
 for (let i = 0; i < tabCategories.length; i++) {
@@ -20,17 +19,34 @@ for (let i = 0; i < tabCategories.length; i++) {
 }
 
 
-//test if browser siupports SVG!
+//test if browser supports SVG!
 if (SVG.supported) {
     //if supported we move ahead and do our dirty jon on DOM loaded!
     SVG.on(document, 'DOMContentLoaded', function () {
         console.log("DOM loaded!");
+
+        //creation of SVGs
         leftSVGList = SVG('svgContent');
+        planSVG = SVG('plan');
+
         for (let i = 0; i < tabElementsSvg.length; i++) {
             leftSVGList.image(`images/${tabElementsSvg[i].imgSrc}`, "100%", "15vh").move(0, `${15 * i}vh`);
         }
         leftSVGList.size("100%", `${tabElementsSvg.length * 15}vh`);
         myLeftDivSVG.height = `${tabElementsSvg.length * 15}vh`;
+
+
+        //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
+        //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
+
+        //select all images from left list and put them in an array
+        let leftImages = leftSVGList.select('image');
+
+        //add listener on click on all images of the list (list itself)
+        leftImages.on("click", function (event) {
+            console.log(this.attr("href"));
+            let myImg = planSVG.image(this.attr("href"), "2vh", "2vh").animate(1000).scale(3, 3);
+        });
     });
 } else {
     alert('SVG not supported');
