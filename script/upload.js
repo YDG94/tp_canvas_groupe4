@@ -9,7 +9,12 @@ function readUrl() {
     let reader=new FileReader();
 
     reader.onloadend=function () {
-        document.querySelector('#plan>svg').attr('fill',`url(${reader.result})`);
+
+        $('#plan').css({
+            'background-image':`url(${reader.result})`,
+            'background-repeat': 'no-repeat',
+            'background-size': '100% 100%',
+        });
     };
 
 if (file){
@@ -17,3 +22,6 @@ if (file){
 }else{}
 
 }
+
+// Branchement du listener onchange
+inputUpload.addEventListener('change',readUrl,true);
