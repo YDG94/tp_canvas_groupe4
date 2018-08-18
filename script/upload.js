@@ -17,9 +17,9 @@ function readUrl() {
         });
     };
 
-if (file){
-    reader.readAsDataURL(file);
-}else{}
+    if (file){
+        reader.readAsDataURL(file);
+    }else{}
 
 }
 
