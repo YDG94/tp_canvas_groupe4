@@ -1,79 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CHOOSE YOUR OWN LIFESTYLE</title>
-    <link rel="stylesheet" href="style/css.css">
+    <head>
+        <meta charset="UTF-8">
+        <title>CHOOSE YOUR OWN LIFESTYLE</title>
+        <link rel="stylesheet" href="style/css.css">
 
-    <script>
+        <script>
 
-    </script>
-</head>
-<body>
+        </script>
+    </head>
+    <body>
 
-<header>
+        <header>
 
-</header>
+        </header>
 
-<main>
-    <section id="left_section">
+        <main>
+            <section id="left_section">
 
-        <h3>Choose an element to add.</h3>
+                <h3>Choose an element to add.</h3>
 
-        <input type="text" name="searchElement" id="searchElement" placeholder="Search for an element..."/>
+                <input type="text" name="searchElement" id="searchElement" placeholder="Search for an element..."/>
 
-        <select id="catElement" name="catElement">
-        </select>
+                <select id="catElement" name="catElement">
+                </select>
 
-        <div id="divSvg">
+                <div id="divSvg">
 
-            <div id="svgContent">
+                    <div id="svgContent">
 
-            </div>
-        </div>
-    </section>
+                    </div>
+                </div>
+            </section>
 
-    <section id="center_section">
-        <!--upload plan photo-->
-        <div id="plan">
+            <section id="center_section">
+                <!--upload plan photo-->
+                <div id="plan">
 
-        </div>
+                </div>
 
-    </section>
+            </section>
 
-    <section id="right_section">
+            <section id="right_section">
 
-        <h3>List of project</h3>
+                <h3>List of project</h3>
 
-        <div id="manageProject">
-            <input id="upload" type="file"/>
-            <a id="upload_link" class="btn_icon"><img src="images/upload.png"></a>​
-            <a class="btn_icon"><img src="images/save.png"></a>
-            <a class="btn_icon"><img src="images/create.png"></a>
-            <a class="btn_icon"><img src="images/delete.png"></a>
-        </div>
+                <div id="manageProject">
+                    <input id="upload" type="file"/>
+                    <a id="upload_link" class="btn_icon"><img src="images/upload.png"></a>​
+                    <a class="btn_icon"><img src="images/save.png"></a>
+                    <a class="btn_icon"><img src="images/create.png"></a>
+                    <a class="btn_icon"><img src="images/delete.png"></a>
+                </div>
 
-        <div id="projectTree">
-            <!--upload project tree from js -->
-        </div>
+                <div id="projectTree">
+                    <!--upload project tree from js -->
+                </div>
 
-        <h3>Elements properties</h3>
+                <h3>Elements properties</h3>
 
-        <div id="elem_prop">
-            <label for="sizeController">size</label>
-            <input type="range" min="5" max="15" value="1" id="sizeController" step="1"/>
+                <div id="elem_prop">
+                    <label for="sizeController">size</label>
+                    <input type="range" min="5" max="15" value="1" id="sizeController" step="1"/>
 
-            <label for="degreeController">rotation</label>
-            <input type="range" min="0" max="360" value="0" id="degreeController" step="10"/>
-        </div>
-    </section>
-</main>
-<script src="script/jquery.min.js"></script>
-<script src="script/jquery.js"></script>
-<script src="script/svg.js"></script>
-<script src="script/svg.draggable.js"></script>
-<script src="script/svg.filter.js"></script>
-    <script src="script/upload.js"></script>
-<script type="module" src="script/main.js"></script>
-</body>
+                    <label for="degreeController">rotation</label>
+                    <input type="range" min="0" max="360" value="0" id="degreeController" step="10"/>
+                </div>
+            </section>
+        </main>
+        <script src="script/jquery.min.js"></script>
+        <script src="script/jquery.js"></script>
+        <script src="script/svg.js"></script>
+        <script src="script/svg.draggable.js"></script>
+        <script src="script/svg.filter.js"></script>
+        <script src="script/upload.js"></script>
+        <script src="script/storage.js"></script>
+        <script type="module" src="script/main.js"></script>
+    </body>
 </html>
