@@ -141,8 +141,7 @@ let insertFunction = function () {
         group.image(this.attr("href"), "4vh", "4vh");
         group.text(function(add) {
             add.tspan('');
-        })
-        //group.add(added);
+        });
 
         //we'll immediately get all images and we'll make it DRAGGABLE!
         centerImages = planSVG.select('image');
@@ -190,7 +189,7 @@ let trasformationFunction = function (setArrayOfImages) {
                 console.log("Libelle: " + event.target.value);
                 let g = _this.parent();
                 g.children()[1].clear();
-                g.children()[1].text(event.target.value).y(-25);
+                g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25).font({size:100});
             }
 
         });

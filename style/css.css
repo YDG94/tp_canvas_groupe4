@@ -1,4 +1,4 @@
-* {
+*:not(text) {
     color: #cdcdcd;
     font-size: 18px;
     font-family: "Comic Sans MS";
@@ -226,4 +226,20 @@ input[type=range]:focus::-ms-fill-upper {
 
 #upload{
     display:none
+}
+
+#textColor{
+    padding: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#libelle{
+    flex: 3;
+    height: 30px;
+}
+
+#couleur{
+    flex: 1;
+    height: 30px;
 }
