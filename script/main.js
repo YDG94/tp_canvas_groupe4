@@ -5,13 +5,15 @@ console.log("js loaded");
 let myLeftDivSVG = document.querySelector("#svgContent");
 let rotationSliderDOM = document.querySelector("#degreeController");
 let zoomSliderDom = document.querySelector("#sizeController");
+let libelle = document.querySelector("#libelle");
 //SVG.js peut adopter un element du DOM !!!
 let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
 let zoomSliderSVG = SVG.adopt(zoomSliderDom);
+let libelleSVG = SVG.adopt(libelle);
 let leftSVGList = null;
 let planSVG = null;
-let centerImages=null;
-let leftImages=null;
+let centerImages = null;
+let leftImages = null;
 const imgSize = 15;
 let tabElementsSvg = svgItems;
 
@@ -45,7 +47,7 @@ if (SVG.supported) {
         //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
         //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
 
-         //insert function with animation and DRAGGABLE ! =P
+        //insert function with animation and DRAGGABLE ! =P
         insertFunction();
 
     });
@@ -80,13 +82,11 @@ categories.addEventListener("change", function (evt) {
     }
     console.log(cat);
     let j = 0;
-    if(cat == 0)
-    {
+    if (cat == 0) {
         tabElementsSvg = svgItems;
-    }else{
-        for (let i = 0; i < svgItems.length; i++)
-        {
-            if(cat == svgItems[i].catValue){
+    } else {
+        for (let i = 0; i < svgItems.length; i++) {
+            if (cat == svgItems[i].catValue) {
                 console.log(svgItems[i].imgSrc);
                 tabElementsSvg[j] = svgItems[i];
                 j++;
@@ -102,20 +102,20 @@ categories.addEventListener("change", function (evt) {
     insertFunction();
 });
 
-let search  = document.getElementById("searchElement");
+let search = document.getElementById("searchElement");
 search.addEventListener("input", function () {
-   let text = event.target.value;
-   console.log(text);
-   let tabRes = [];
-   let j = 0;
-   for (let i = 0; i < svgItems.length; i++){
-       let test = svgItems[i].imgSrc.indexOf(text);
-       if(test >= 0){
-           tabRes[j] = svgItems[i];
-           j++;
-       }
-   }
-   console.log(tabRes);
+    let text = event.target.value;
+    console.log(text);
+    let tabRes = [];
+    let j = 0;
+    for (let i = 0; i < svgItems.length; i++) {
+        let test = svgItems[i].imgSrc.indexOf(text);
+        if (test >= 0) {
+            tabRes[j] = svgItems[i];
+            j++;
+        }
+    }
+    console.log(tabRes);
     myLeftDivSVG.firstElementChild.innerHTML = "";
     for (let i = 0; i < tabRes.length; i++) {
         leftSVGList.image(`images/${tabRes[i].imgSrc}`, "100%", "15vh").move(0, `${15 * i}vh`);
@@ -126,27 +126,27 @@ search.addEventListener("input", function () {
 });
 
 // ****  INSERT FUNCTION **** //
-let insertFunction = function(){
+let insertFunction = function () {
     //select all images from left list and put them in an array
     leftImages = leftSVGList.select('image');
     //add listener on click on all images of the list (list itself)
     leftImages.on("click", function (event) {
-        //the image will be created and is chained to animation
-        planSVG.image(this.attr("href"), "5vh", "5vh").attr({
+        let group = planSVG.group();
+
+        group.attr({
             'x': 0
             , 'y': '50%'
         }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
+        //the image will be created and is chained to animation
+        group.image(this.attr("href"), "4vh", "4vh");
+        group.text(function(add) {
+            add.tspan('');
+        });
 
         //we'll immediately get all images and we'll make it DRAGGABLE!
         centerImages = planSVG.select('image');
         console.log(centerImages);
-        centerImages.draggable({
-              minX: 20
-            , minY: window.innerHeight * 30 /100
-            , maxX: window.innerWidth * 20.5/100
-            , maxY: window.innerHeight * 58/100
-            , snapToGrid: 5
-        });
+        group.draggable();
         //voir rotate function plus en bas pur le details!
         trasformationFunction(centerImages);
     });
@@ -154,13 +154,13 @@ let insertFunction = function(){
 
 //*** magic function for ROTATIION ***
 let trasformationFunction = function (setArrayOfImages) {
-    setArrayOfImages.on("click", function (event) {
+    setArrayOfImages.on("click", function (evt) {
 
-        setArrayOfImages.each(function(i) {
+        setArrayOfImages.each(function (i) {
             this.unfilter();
         });
 
-        this.filter(function(add) {
+        this.filter(function (add) {
             let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
 
             add.blend(add.source, blur);
@@ -171,6 +171,7 @@ let trasformationFunction = function (setArrayOfImages) {
          pour le rebrancher seulment sur le "this" de ce click-ci */
         rotationSliderSVG.off("input");
         zoomSliderSVG.off("input");
+        libelleSVG.off("keyup");
         rotationSliderSVG.on("input", function (event) {
             let myDegree = event.target.value;
             console.log(myDegree);
@@ -179,8 +180,19 @@ let trasformationFunction = function (setArrayOfImages) {
         zoomSliderSVG.on("input", function (event) {
             let scale = event.target.value;
             //calculate new scale and apply!
-            _this.size(scale+"vh", scale+"vh");
-        })
+            _this.size(scale + "vh", scale + "vh");
+        });
+
+        libelleSVG.on("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                console.log("Libelle: " + event.target.value);
+                let g = _this.parent();
+                g.children()[1].clear();
+                g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25).font({size:100});
+            }
+
+        });
     });
 };
 
