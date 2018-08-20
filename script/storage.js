@@ -17,11 +17,11 @@ function populate() {
 
 /* Liste des fonctions pour gérer les sauvgardes et chargements*/
 function save(nom_plan) {
-    localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#center_section').innerHTML));
+    localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#plan').innerHTML));
 }
 
 function autoSave() {
-    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#center_section').innerHTML));
+    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan').innerHTML));
 }
 
 function deleteSave(nom_plan) {
@@ -31,22 +31,46 @@ function deleteSave(nom_plan) {
 function getSave(nom_plan) {
     let myPlan_json = localStorage.getItem(nom_plan);
     if (myPlan_json !== null) {
-
         console.log(JSON.parse(myPlan_json));
-        document.querySelector('#center_section').innerHTML = JSON.parse(myPlan_json);
+        document.querySelector('#plan').innerHTML ="";
+        document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
+     /* Brancher les listeners sur les images rechargees pour les transformations */
+       /* centerImages = planSVG.select('image');
+        console.log(centerImages);
+        centerImages.draggable({
+            minX: 20
+            , minY: window.innerHeight * 30 /100
+            , maxX: window.innerWidth * 20.5/100
+            , maxY: window.innerHeight * 58/100
+            , snapToGrid: 5
+        });
+        trasformationFunction(centerImages);
+        */
     } else {
-        document.querySelector('#center_section').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
+        document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
 }
 
 function getAutoSave() {
     let myPlan_json = localStorage.getItem('auto_save');
     if (myPlan_json !== null) {
-
         console.log(JSON.parse(myPlan_json));
-        document.querySelector('#center_section').innerHTML = JSON.parse(myPlan_json);
+        document.querySelector('#plan').innerHTML ="";
+        document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
+        /* Brancher les listeners sur les images rechargees pour les transformations */
+        /* centerImages = planSVG.select('image');
+         console.log(centerImages);
+         centerImages.draggable({
+             minX: 20
+             , minY: window.innerHeight * 30 /100
+             , maxX: window.innerWidth * 20.5/100
+             , maxY: window.innerHeight * 58/100
+             , snapToGrid: 5
+         });
+         trasformationFunction(centerImages);
+         */
     } else {
-        document.querySelector('#center_section').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
+        document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
 }
 
@@ -66,20 +90,20 @@ function msg() {
 }
 
 /* Chargement de la liste des plans avant le chargement */
-window.beforeunload=populate();
+window.beforeunload = populate();
 
 // Chargement manuel d'un plan
-let list_plans=document.getElementsByClassName('list');
+let list_plans = document.getElementsByClassName('list');
 for (let plan of list_plans) {
-    plan.addEventListener('click',function () {
+    plan.addEventListener('click', function () {
         getSave(plan.innerText);
     });
 }
 
 //Suppresion d'un plan
 for (let plan of list_plans) {
-    plan.addEventListener('dblclick',function () {
-        let choix=window.alert('You are going to delete tour blue-print');
+    plan.addEventListener('dblclick', function () {
+        let choix = window.alert('You are going to delete tour blue-print');
         //deleteSave(plan.innerText);
     });
 }
