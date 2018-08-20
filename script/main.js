@@ -131,22 +131,25 @@ let insertFunction = function(){
     leftImages = leftSVGList.select('image');
     //add listener on click on all images of the list (list itself)
     leftImages.on("click", function (event) {
-        //the image will be created and is chained to animation
-        planSVG.image(this.attr("href"), "5vh", "5vh").attr({
+        let group = planSVG.group();
+
+        group.attr({
             'x': 0
             , 'y': '50%'
         }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
 
+         group.text(function(add) {
+            add.tspan('cioa').dy(0);
+        });
+        //the image will be created and is chained to animation
+        group.image(this.attr("href"), "5vh", "5vh");
+
+        //group.add(added);
+
         //we'll immediately get all images and we'll make it DRAGGABLE!
         centerImages = planSVG.select('image');
         console.log(centerImages);
-        centerImages.draggable({
-              minX: 20
-            , minY: window.innerHeight * 30 /100
-            , maxX: window.innerWidth * 20.5/100
-            , maxY: window.innerHeight * 58/100
-            , snapToGrid: 5
-        });
+        group.draggable();
         //voir rotate function plus en bas pur le details!
         trasformationFunction(centerImages);
     });
