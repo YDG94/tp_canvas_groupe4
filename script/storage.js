@@ -103,7 +103,6 @@ function getSave(nom_plan) {
         console.log(JSON.parse(myPlan_json));
         document.querySelector('#plan').innerHTML = "";
         document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
-
     } else {
         if (localStorage.getItem('auto_save') !== null) {
             document.querySelector('#plan').innerHTML = getAutoSave;
@@ -117,12 +116,6 @@ function getAutoSave() {
         console.log(JSON.parse(myPlan_json));
         document.querySelector('#plan').innerHTML = "";
         document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
-        // Brancher les listeners sur les images rechargees pour les transformations
-        let planSVG = SVG('svg:last-child');
-        let centerImages = planSVG.select('image');
-        console.log(centerImages);
-        centerImages.draggable();
-        trasformationFunction(centerImages);
     } else {
         document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
