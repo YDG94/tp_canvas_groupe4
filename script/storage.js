@@ -94,7 +94,6 @@ function letSave() {
     if (plan_name !== null && plan_name !== "") {
         console.log(plan_name);
         save(plan_name);
-        window.addEventListener('change', getArray);
     }
 }
 
@@ -118,10 +117,6 @@ function deletePlan() {
         plan.addEventListener('dblclick', function () {
             if (window.confirm('You are going to delete your blue-print, are you sure ?')) {
                 deleteSave(plan.innerText);
-                window.addEventListener('change', function () {
-                    getArray();
-                    displayArray();
-                });
             }
         });
     }
@@ -132,8 +127,16 @@ function deletePlan() {
 /********************************************************************************************************/
 
 // Branchement des listeners de type click sur les icones de sauvegarde et suppresion
-btn_save.addEventListener('click', letSave);
-btn_delete.addEventListener('click', deletePlan);
+btn_save.addEventListener('click', function () {
+    letSave();
+    window.addEventListener('change',getArray);
+
+});
+
+btn_delete.addEventListener('click', function () {
+    deleteSave();
+    window.addEventListener('change',getArray);
+});
 
 // Branchement du listener pour la sauvegarde auto au moment de la fermeture de la page
 //window.onunload = autoSave;
