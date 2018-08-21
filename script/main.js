@@ -48,21 +48,23 @@ if (SVG.supported) {
         leftSVGList.size("100%", `${tabElementsSvg.length * imgSize}vh`);
         myLeftDivSVG.height = `${tabElementsSvg.length * imgSize}vh`;
 
-        //let myTestImage = planSVG.image("images/bureau01.svg", "5vw", "5vh");
-        //myTestImage.animate({ ease: '<', delay: '1.5s' }).attr({ fill: '#f03' }).animate().dmove(50,50);
-
         //insert function with animation and DRAGGABLE ! =P
         insertFunction();
 
-        let images = leftSVGList.select('image');;
-        images.on("mouseover", function (evt) {
-            images.each(function (i) {
-                this.unfilter();
-            });
+        let images = leftSVGList.select('image');
+        images.on("mouseenter", function (evt) {
+
+            this.animate(700, '<>', 0).scale(1.1, 1.1).reverse().loop();
+
             this.filter(function (add) {
                 let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
                 add.blend(add.source, blur);
             });
+        });
+
+        images.on("mouseleave", function (evt) {
+            this.unfilter();
+            this.finish();
         });
 
     });
