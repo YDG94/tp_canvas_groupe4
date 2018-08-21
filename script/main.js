@@ -132,16 +132,15 @@ let insertFunction = function () {
     //add listener on click on all images of the list (list itself)
     leftImages.on("click", function (event) {
         let group = planSVG.group();
-
-        group.attr({
-            'x': 0
-            , 'y': '50%'
-        }).animate(1500, '<>').dmove('15%', 0).scale(3, 3);
+        let plan = document.getElementById("plan");
         //the image will be created and is chained to animation
+        group.x(0).y(plan.offsetHeight/2)
         group.image(this.attr("href"), "4vh", "4vh");
         group.text(function(add) {
             add.tspan('');
         });
+
+        group.animate(1500, '<>').dmove(plan.offsetWidth/2, 0).scale(3, 3);
 
         //we'll immediately get all images and we'll make it DRAGGABLE!
         centerImages = planSVG.select('image');
@@ -157,10 +156,10 @@ let trasformationFunction = function (setArrayOfImages) {
     setArrayOfImages.on("click", function (evt) {
 
         setArrayOfImages.each(function (i) {
-            this.unfilter();
+            this.parent().unfilter();
         });
 
-        this.filter(function (add) {
+        this.parent().filter(function (add) {
             let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
 
             add.blend(add.source, blur);
