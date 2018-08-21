@@ -50,6 +50,17 @@ if (SVG.supported) {
         //insert function with animation and DRAGGABLE ! =P
         insertFunction();
 
+        let images = leftSVGList.select('image');;
+        images.on("mouseover", function (evt) {
+            images.each(function (i) {
+                this.unfilter();
+            });
+            this.filter(function (add) {
+                let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
+                add.blend(add.source, blur);
+            });
+        });
+
     });
 } else {
     alert('SVG not supported');
@@ -190,7 +201,6 @@ let trasformationFunction = function (setArrayOfImages) {
                 g.children()[1].clear();
                 g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25);
             }
-
         });
     });
 };
