@@ -1,22 +1,26 @@
 "use strict";
 
 /******************** Variables et autres DOM elements *********************/
-let btn_save = document.getElementsByClassName('btn_icon')[0];
-let btn_delete = document.getElementsByClassName('btn_icon')[3];
-let div_plans = document.querySelector('#projectTree');
-let tab_plans = [];
-
+let btn_save = document.querySelector('#btn_save');
+let btn_delete = document.querySelector('#btn_delete');
 /****************************************************************************/
 
 /****************************************************************************/
 
-/******************* Fonction pour gerer les tableaux ********************/
+/******************* Fonction pour generer la liste des plans ********************/
 function getArray() {
-    for (let i = 0; i < tab_plans.length; i++) {
+    let div_plans = document.querySelector('#projectTree');
+    for (let i = 0; i < localStorage.length; i++) {
         let p = document.createElement('p');
         p.classList.add('list');
-        p.innerText = tab_plans[i];
+        p.innerText = localStorage.key(i);
         div_plans.appendChild(p);
+    }
+}
+
+function displayArray() {
+    for (let i = 0; i < localStorage.length; i++) {
+        console.log(`dans le tableau : ${localStorage.key(i)}`);
     }
 }
 
@@ -27,17 +31,19 @@ function getArray() {
 /***************** Liste des fonctions de base pour gérer les sauvgardes et chargements *****************/
 function save(nom_plan) {
     localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#plan').innerHTML));
-    tab_plans.push(nom_plan);
 }
 
 function autoSave() {
-    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan').innerHTML));
-    tab_plans.push('auto_save');
+    if (localStorage.includes('auto_save')) {
+        deleteSave('auto_save');
+        localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan').innerHTML));
+    } else {
+        localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan').innerHTML));
+    }
 }
 
 function deleteSave(nom_plan) {
     localStorage.removeItem(nom_plan);
-    tab_plans = tab_plans.filter(item => item !== nom_plan);
 }
 
 function getSave(nom_plan) {
@@ -46,20 +52,17 @@ function getSave(nom_plan) {
         console.log(JSON.parse(myPlan_json));
         document.querySelector('#plan').innerHTML = "";
         document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
-        /* Brancher les listeners sur les images rechargees pour les transformations */
-        /* centerImages = planSVG.select('image');
-         console.log(centerImages);
-         centerImages.draggable({
-             minX: 20
-             , minY: window.innerHeight * 30 /100
-             , maxX: window.innerWidth * 20.5/100
-             , maxY: window.innerHeight * 58/100
-             , snapToGrid: 5
-         });
-         trasformationFunction(centerImages);
-         */
+        // Brancher les listeners sur les images rechargees pour les transformations
+        let planSVG = SVG('#SvgjsSvg1008');
+        let centerImages = planSVG.select('image');
+        console.log(centerImages);
+        centerImages.draggable();
+        trasformationFunction(centerImages);
+
     } else {
-        document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
+        if (localStorage.getItem('auto_save') !== null) {
+            document.querySelector('#plan').innerHTML = getAutoSave;
+        }
     }
 }
 
@@ -69,18 +72,12 @@ function getAutoSave() {
         console.log(JSON.parse(myPlan_json));
         document.querySelector('#plan').innerHTML = "";
         document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
-        /* Brancher les listeners sur les images rechargees pour les transformations */
-        /* centerImages = planSVG.select('image');
-         console.log(centerImages);
-         centerImages.draggable({
-             minX: 20
-             , minY: window.innerHeight * 30 /100
-             , maxX: window.innerWidth * 20.5/100
-             , maxY: window.innerHeight * 58/100
-             , snapToGrid: 5
-         });
-         trasformationFunction(centerImages);
-         */
+        // Brancher les listeners sur les images rechargees pour les transformations
+        let planSVG = SVG('#SvgjsSvg1008');
+        let centerImages = planSVG.select('image');
+        console.log(centerImages);
+        centerImages.draggable();
+        trasformationFunction(centerImages);
     } else {
         document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
@@ -91,25 +88,28 @@ function getAutoSave() {
 /***********************************************************************************************/
 
 /********* Liste des fonctions pour mise en situation des fonctions précédentes ****************/
-
-// Mise en place sauvegarde manuelle
+// Sauvegarde manuelle d'un plan
 function letSave() {
     let plan_name = window.prompt('Enter a blue-print name', 'plan');
-    if (plan_name !== null && plan_name !== '') {
+    if (plan_name !== null && plan_name !== "") {
         console.log(plan_name);
         save(plan_name);
+        window.addEventListener('change', getArray);
     }
 }
 
 // Chargement manuel d'un plan
 function loadPlan() {
     let list_plans = document.getElementsByClassName('list');
+    console.log(list_plans);
     for (let plan of list_plans) {
         plan.addEventListener('click', function () {
             getSave(plan.innerText);
         });
     }
 }
+
+loadPlan();
 
 // Suppresion d'un plan
 function deletePlan() {
@@ -118,29 +118,31 @@ function deletePlan() {
         plan.addEventListener('dblclick', function () {
             if (window.confirm('You are going to delete your blue-print, are you sure ?')) {
                 deleteSave(plan.innerText);
+                window.addEventListener('change', function () {
+                    getArray();
+                    displayArray();
+                });
             }
         });
     }
 }
 
 /********************************************************************************************************/
+
 /********************************************************************************************************/
 
-// Branchement des listener sde type click sur les icones de sauvegarde et suppresion
+// Branchement des listeners de type click sur les icones de sauvegarde et suppresion
 btn_save.addEventListener('click', letSave);
 btn_delete.addEventListener('click', deletePlan);
 
 // Branchement du listener pour la sauvegarde auto au moment de la fermeture de la page
-window.onunload = autoSave;
+//window.onunload = autoSave;
 
-// Chargement de la sauvegarde auto
-window.onload = getAutoSave;
+// Branchement du listener pour le chargement de la sauvegarde auto
+//window.onload = getAutoSave;
 
-// Chargement de la liste des plans au moment du chargement
-window.onload = getArray;
-
-
-
+// Branchement du listener pour le chargement de la liste des plans
+window.addEventListener('load', getArray);
 
 
 
