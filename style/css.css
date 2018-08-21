@@ -221,7 +221,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .btn_icon>img{
-    height: 40px;
+    height: 50px;
 }
 
 #upload{
@@ -244,4 +244,7 @@ input[type=range]:focus::-ms-fill-upper {
     height: 30px;
 }
 
-
+#btn-delete{
+    width: 100%;
+    display: inline-flex;
+}

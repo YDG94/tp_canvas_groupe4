@@ -6,10 +6,14 @@ let myLeftDivSVG = document.querySelector("#svgContent");
 let rotationSliderDOM = document.querySelector("#degreeController");
 let zoomSliderDom = document.querySelector("#sizeController");
 let libelle = document.querySelector("#libelle");
+let deleteElem = document.getElementById("removeElem");
+let deletePlan = document.getElementById("removePlan");
+let viderStand = document.getElementById("viderStand");
 //SVG.js peut adopter un element du DOM !!!
 let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
 let zoomSliderSVG = SVG.adopt(zoomSliderDom);
 let libelleSVG = SVG.adopt(libelle);
+let dElemSVG = SVG.adopt(deleteElem);
 let leftSVGList = null;
 let planSVG = null;
 let centerImages = null;
@@ -202,6 +206,10 @@ let trasformationFunction = function (setArrayOfImages) {
                 g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25);
             }
         });
+
+        dElemSVG.on("click", function (event) {
+            let g = _this.parent();
+            g.remove();
+        });
     });
 };
-

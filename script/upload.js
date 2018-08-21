@@ -9,7 +9,7 @@ function readUrl() {
     let reader = new FileReader();
 
     reader.onloadend = function () {
-        $('#SvgjsSvg1008').css({
+        $('#plan>svg').css({
             'background-image': `url(${reader.result})`,
             'background-repeat': 'no-repeat',
             'background-size': '100% 100%',
