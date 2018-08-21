@@ -1,3 +1,5 @@
+import {planSVG} from "./main";
+
 "use strict";
 
 /******************** Variables et autres DOM elements *********************/
@@ -84,11 +86,11 @@ let trasformationFunction = function (setArrayOfImages) {
 
 /***************** Liste des fonctions de base pour gérer les sauvgardes et chargements *****************/
 function save(nom_plan) {
-    localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#plan').innerHTML));
+    localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#plan>svg').innerHTML));
 }
 
 function autoSave() {
-    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan').innerHTML));
+    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan>svg').innerHTML));
 }
 
 function deleteSave(nom_plan) {
@@ -101,11 +103,11 @@ function getSave(nom_plan) {
     if (myPlan_json !== null) {
         alert(`${nom_plan} is loaded`);
         console.log(JSON.parse(myPlan_json));
-        document.querySelector('#plan').innerHTML = "";
-        document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
+        document.querySelector('#plan>svg').innerHTML = "";
+        document.querySelector('#plan>svg').innerHTML = JSON.parse(myPlan_json);
     } else {
         if (localStorage.getItem('auto_save') !== null) {
-            document.querySelector('#plan').innerHTML = getAutoSave;
+            document.querySelector('#plan>svg').innerHTML = getAutoSave;
         }
     }
 }
@@ -114,10 +116,10 @@ function getAutoSave() {
     let myPlan_json = localStorage.getItem('auto_save');
     if (myPlan_json !== null) {
         console.log(JSON.parse(myPlan_json));
-        document.querySelector('#plan').innerHTML = "";
-        document.querySelector('#plan').innerHTML = JSON.parse(myPlan_json);
+        document.querySelector('#plan>svg').innerHTML = "";
+        document.querySelector('#plan>svg').innerHTML = JSON.parse(myPlan_json);
     } else {
-        document.querySelector('#plan').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
+        document.querySelector('#plan>svg').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
 }
 
@@ -144,8 +146,7 @@ function loadPlan() {
     for (let plan of list_plans) {
         plan.addEventListener('click', function () {
             getSave(plan.innerText);
-            // Brancher les listeners sur les images rechargees pour les transformations
-            let planSVG=document.querySelector('#SvgjsSvg1008');
+            // Brancher les listeners sur les images rechargees pour les transformation
             let centerImages = planSVG.select('image');
             console.log(centerImages);
             centerImages.draggable();
@@ -175,7 +176,7 @@ function deletePlan() {
 // Branchement des listeners de type click sur les icones de sauvegarde , chargement et suppresion
 btn_save.addEventListener('click', letSave);
 btn_load.addEventListener('click', loadPlan);
-btn_delete.addEventListener('click', deletePlan);
+btn_delete.addEventListener('dblclick', deletePlan);
 
 // Branchement du listener pour la sauvegarde auto au moment de la fermeture de la page
 window.onunload = autoSave;
