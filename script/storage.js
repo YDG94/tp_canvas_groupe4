@@ -2,6 +2,7 @@
 
 /******************** Variables et autres DOM elements *********************/
 let btn_save = document.querySelector('#btn_save');
+let btn_load = document.querySelector('#btn_load');
 let btn_delete = document.querySelector('#btn_delete');
 /****************************************************************************/
 
@@ -108,8 +109,6 @@ function loadPlan() {
     }
 }
 
-loadPlan();
-
 // Suppresion d'un plan
 function deletePlan() {
     let list_plans = document.getElementsByClassName('list');
@@ -126,16 +125,18 @@ function deletePlan() {
 
 /********************************************************************************************************/
 
-// Branchement des listeners de type click sur les icones de sauvegarde et suppresion
+// Branchement des listeners de type click sur les icones de sauvegarde , chargement et suppresion
 btn_save.addEventListener('click', function () {
     letSave();
-    window.addEventListener('change',getArray);
+    //getArray();
 
 });
 
+btn_load.addEventListener('click',loadPlan);
+
 btn_delete.addEventListener('click', function () {
-    deleteSave();
-    window.addEventListener('change',getArray);
+    deletePlan();
+    //getArray();
 });
 
 // Branchement du listener pour la sauvegarde auto au moment de la fermeture de la page
@@ -145,6 +146,7 @@ btn_delete.addEventListener('click', function () {
 //window.onload = getAutoSave;
 
 // Branchement du listener pour le chargement de la liste des plans
+window.addEventListener('change', getArray);
 window.addEventListener('load', getArray);
 
 
