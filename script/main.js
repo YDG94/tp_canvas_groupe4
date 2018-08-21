@@ -189,7 +189,7 @@ let trasformationFunction = function (setArrayOfImages) {
                 console.log("Libelle: " + event.target.value);
                 let g = _this.parent();
                 g.children()[1].clear();
-                g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25).font({size:100});
+                g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25);
             }
 
         });
