@@ -1,5 +1,3 @@
-import {planSVG} from "./main";
-
 "use strict";
 
 /******************** Variables et autres DOM elements *********************/
@@ -21,6 +19,7 @@ let libelleSVG = SVG.adopt(libelle);
 /******************* Fonction pour generer la liste des plans ********************/
 function getArray() {
     let div_plans = document.querySelector('#projectTree');
+    div_plans.innerHTML = "";
     for (let i = 0; i < localStorage.length; i++) {
         let p = document.createElement('p');
         p.classList.add('list');
@@ -86,7 +85,11 @@ let trasformationFunction = function (setArrayOfImages) {
 
 /***************** Liste des fonctions de base pour gérer les sauvgardes et chargements *****************/
 function save(nom_plan) {
-    localStorage.setItem(nom_plan, JSON.stringify(document.querySelector('#plan>svg').innerHTML));
+    let p = {
+        backgroundImage: document.querySelector("#plan>svg").style.backgroundImage,
+        plan: document.querySelector('#plan>svg').innerHTML
+    }
+    localStorage.setItem(nom_plan, JSON.stringify(p));
 }
 
 function autoSave() {
@@ -102,9 +105,20 @@ function getSave(nom_plan) {
     let myPlan_json = localStorage.getItem(nom_plan);
     if (myPlan_json !== null) {
         alert(`${nom_plan} is loaded`);
-        console.log(JSON.parse(myPlan_json));
+        console.log("get Save: " + JSON.parse(myPlan_json).plan);
         document.querySelector('#plan>svg').innerHTML = "";
-        document.querySelector('#plan>svg').innerHTML = JSON.parse(myPlan_json);
+        let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
+        let obj = JSON.parse(myPlan_json);
+        planSVG.svg(obj.plan);
+
+        console.log((obj.backgroundImage));
+        document.querySelector('#plan>svg').style.backgroundImage = obj.backgroundImage;
+        document.querySelector('#plan>svg').style.backgroundRepeat = "no-repeat";
+        document.querySelector('#plan>svg').style.backgroundSize = "100% 100%";
+        let centerImages = planSVG.select('image');
+        console.log(centerImages);
+        planSVG.select('g').draggable();
+        trasformationFunction(centerImages);
     } else {
         if (localStorage.getItem('auto_save') !== null) {
             document.querySelector('#plan>svg').innerHTML = getAutoSave;
@@ -117,7 +131,8 @@ function getAutoSave() {
     if (myPlan_json !== null) {
         console.log(JSON.parse(myPlan_json));
         document.querySelector('#plan>svg').innerHTML = "";
-        document.querySelector('#plan>svg').innerHTML = JSON.parse(myPlan_json);
+        let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
+        planSVG.add(JSON.parse(myPlan_json));
     } else {
         document.querySelector('#plan>svg').innerHTML = "<p>Aucun plan n'a été chargé.</p>";
     }
@@ -135,7 +150,7 @@ function letSave() {
         console.log(plan_name);
         alert(`${plan_name} is saved`);
         save(plan_name);
-        location.reload(true);
+        getArray();
     }
 }
 
@@ -146,11 +161,6 @@ function loadPlan() {
     for (let plan of list_plans) {
         plan.addEventListener('click', function () {
             getSave(plan.innerText);
-            // Brancher les listeners sur les images rechargees pour les transformation
-            let centerImages = planSVG.select('image');
-            console.log(centerImages);
-            centerImages.draggable();
-            trasformationFunction(centerImages);
         });
     }
 
