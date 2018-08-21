@@ -9,8 +9,7 @@ function readUrl() {
     let reader = new FileReader();
 
     reader.onloadend = function () {
-
-        $('#plan').css({
+        $('#SvgjsSvg1008').css({
             'background-image': `url(${reader.result})`,
             'background-repeat': 'no-repeat',
             'background-size': '100% 100%',
@@ -21,7 +20,6 @@ function readUrl() {
         reader.readAsDataURL(file);
     } else {
     }
-
 }
 
 // Branchement du listener onchange
