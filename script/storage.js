@@ -75,7 +75,6 @@ let trasformationFunction = function (setArrayOfImages) {
                 g.children()[1].clear();
                 g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25);
             }
-
         });
     });
 };
@@ -118,7 +117,7 @@ function getSave(nom_plan) {
         let centerImages = planSVG.select('image');
         console.log(centerImages);
         planSVG.select('g').draggable();
-        trasformationFunction(centerImages);
+        //trasformationFunction(centerImages);
     } else {
         if (localStorage.getItem('auto_save') !== null) {
             document.querySelector('#plan>svg').innerHTML = getAutoSave;
