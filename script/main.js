@@ -20,6 +20,7 @@ let centerImages = null;
 let leftImages = null;
 const imgSize = 15;
 let tabElementsSvg = svgItems;
+let myFilter = null;
 
 
 let categories = document.querySelector("#catElement");
@@ -151,7 +152,7 @@ let insertFunction = function () {
         let group = planSVG.group();
         let plan = document.getElementById("plan");
         //the image will be created and is chained to animation
-        group.x(0).y(plan.offsetHeight/2)
+        group.x(0).y(plan.offsetHeight/2);
         group.image(this.attr("href"), "4vh", "4vh");
         group.text(function(add) {
             add.tspan('');
@@ -175,12 +176,15 @@ let trasformationFunction = function (setArrayOfImages) {
         setArrayOfImages.each(function (i) {
             this.parent().unfilter();
         });
-
+    if(myFilter === null){
         this.parent().filter(function (add) {
             let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
-
             add.blend(add.source, blur);
         });
+            myFilter = this.parent().filterer;
+    }else{
+        this.parent().filter(myFilter);
+    }
         //rect.move('5%', 0);
         let _this = this;
         /* il faut debrancher le listener pour input sur tous les images
@@ -215,3 +219,4 @@ let trasformationFunction = function (setArrayOfImages) {
         });
     });
 };
+
