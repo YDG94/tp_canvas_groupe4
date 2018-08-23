@@ -14,7 +14,6 @@ let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
 let zoomSliderSVG = SVG.adopt(zoomSliderDom);
 let libelleSVG = SVG.adopt(libelle);
 let dElemSVG = SVG.adopt(deleteElem);
-let myFilter = null;
 /****************************************************************************/
 
 /****************************************************************************/
@@ -24,10 +23,10 @@ function getArray() {
     let div_plans = document.querySelector('#projectTree');
     div_plans.innerHTML = "";
     for (let i = 0; i < localStorage.length; i++) {
-        let p = document.createElement('p');
-        p.classList.add('list');
-        p.innerText = localStorage.key(i);
-        div_plans.appendChild(p);
+        let div = document.createElement('div');
+        div.classList.add('list');
+        div.innerText = localStorage.key(i);
+        div_plans.appendChild(div);
     }
 }
 
@@ -50,7 +49,7 @@ let trasformationFunction = function (setArrayOfImages) {
             this.parent().attr({
                 filter: "url(#" + document.querySelector('#plan filter').getAttribute("id") + ")"
             });
-        }else {
+        } else {
             document.querySelector('#plan defs').innerHTML = '<filter id="SvgjsFilter1039"><feOffset id="SvgjsFeOffset1040" dx="0" dy="3" result="SvgjsFeOffset1040Out" in="SourceAlpha"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1041" stdDeviation="3 3" result="SvgjsFeGaussianBlur1041Out" in="SvgjsFeOffset1040Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1042" in="SourceGraphic" in2="SvgjsFeGaussianBlur1041Out" mode="normal" result="SvgjsFeBlend1042Out"></feBlend></filter>';
             this.parent().attr({
                 filter: "url(#" + document.querySelector('#plan filter').getAttribute("id") + ")"
@@ -121,6 +120,7 @@ function getSave(nom_plan) {
         alert(`${nom_plan} is loaded`);
         console.log("get Save: " + JSON.parse(myPlan_json).plan);
         document.querySelector('#plan>svg').innerHTML = "";
+        document.querySelector('#plan>svg').style.backgroundImage = "";
         let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
         let obj = JSON.parse(myPlan_json);
         planSVG.svg(obj.plan);
@@ -167,30 +167,6 @@ function letSave() {
     }
 }
 
-// Chargement manuel d'un plan
-function loadPlan() {
-    let list_plans = document.getElementsByClassName('list');
-    console.log(list_plans);
-    for (let plan of list_plans) {
-        plan.addEventListener('click', function () {
-            getSave(plan.innerText);
-        });
-    }
-
-}
-
-// Suppresion d'un plan
-function deletePlan() {
-    let list_plans = document.getElementsByClassName('list');
-    for (let plan of list_plans) {
-        plan.addEventListener('dblclick', function () {
-            if (window.confirm('You are going to delete your blue-print, are you sure ?')) {
-                deleteSave(plan.innerText);
-                location.reload(true);
-            }
-        });
-    }
-}
 
 /********************************************************************************************************/
 
@@ -198,8 +174,29 @@ function deletePlan() {
 
 // Branchement des listeners de type click sur les icones de sauvegarde , chargement et suppresion
 btn_save.addEventListener('click', letSave);
-btn_load.addEventListener('click', loadPlan);
-btn_delete.addEventListener('dblclick', deletePlan);
+
+let tree = document.querySelector("#projectTree");
+
+//chargement de plan on double click
+tree.addEventListener("dblclick", function (evt) {
+    getSave(evt.target.innerText.toLowerCase());
+});
+
+// Suppresion d'un plan
+btn_delete.addEventListener("click", function (evt) {
+    console.log(this.children[0]);
+    btn_delete.classList.add("listClick");
+    tree.addEventListener("click", function (evt) {
+        if (window.confirm('You are going to delete your blue-print, are you sure ?')) {
+            console.log(evt.target.innerText.toLowerCase());
+            deleteSave(evt.target.innerText.toLowerCase());
+        }
+        getArray();
+        btn_delete.classList.remove("listClick");
+    });
+
+});
+
 
 // Branchement du listener pour la sauvegarde auto au moment de la fermeture de la page
 window.onunload = autoSave;

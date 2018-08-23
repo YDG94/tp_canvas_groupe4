@@ -12,12 +12,13 @@ body {
 }
 
 header {
+    width: 60%;
     height: 70px;
     opacity: 0.5;
-    margin: 15px;
-    -webkit-box-shadow: 0 0 160px -15px rgba(65,171,239,1);
-    -moz-box-shadow: 0 0 160px -15px rgba(65,171,239,1);
-    box-shadow: 0 0 160px -15px rgba(65,171,239,1);
+    margin: 15px auto;
+    -webkit-box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
+    -moz-box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
+    box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
 }
 
 main {
@@ -34,20 +35,20 @@ main {
     width: 20%;
     height: 100%;
     text-align: center;
-    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
 }
 
 #right_section {
     flex: 1;
     padding: 20px;
-    width: 20%;
+    width: 18%;
     height: 100%;
     text-align: center;
-    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
 }
 
 #center_section {
@@ -55,9 +56,9 @@ main {
     width: 60%;
     height: 100%;
     margin-right: 15px;
-    -webkit-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    -moz-box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
-    box-shadow: inset 0 0 80px -15px rgba(65,171,239,1);
+    -webkit-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    -moz-box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
+    box-shadow: inset 0 0 80px -15px rgba(65, 171, 239, 1);
 
 }
 
@@ -79,7 +80,6 @@ main {
     display: inline-block;
     margin-top: 25px;
     width: 96%;
-    background-color: #FFFFFF;
     overflow-y: scroll;
 }
 
@@ -87,36 +87,36 @@ main {
     display: block;
     width: 100%;
     height: 100%;
+    background: #dddddd17;
 }
 
-#plan{
+#plan {
     margin: 1.5% auto;
     width: 96%;
     height: 96%;
     background-color: white;
 }
 
-#plan>svg{
+#plan > svg {
     width: 100%;
     height: 100%;
 }
 
-#manageProject{
+#manageProject {
     display: flex;
     flex-wrap: nowrap;
     height: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-#projectTree{
+#projectTree {
     height: 49%;
     overflow-y: auto;
-    background: white;
 }
 
-#elem_prop{
+#elem_prop {
     overflow-y: auto;
-    background: white;
+    background: #dddddd17;
 }
 
 /* section dedicated to input range sliders!*/
@@ -130,6 +130,7 @@ input[type=range] {
     /*required for proper track sizing in FF*/
     width: 95%;
 }
+
 input[type=range]::-webkit-slider-runnable-track {
     width: 100%;
     height: 5px;
@@ -137,18 +138,21 @@ input[type=range]::-webkit-slider-runnable-track {
     border: none;
     border-radius: 3px;
 }
+
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: goldenrod;
+    background: #41ABEF;
     margin-top: -4px;
 }
+
 input[type=range]:focus {
     outline: none;
 }
+
 input[type=range]:focus::-webkit-slider-runnable-track {
     background: #ccc;
 }
@@ -160,17 +164,18 @@ input[type=range]::-moz-range-track {
     border: none;
     border-radius: 3px;
 }
+
 input[type=range]::-moz-range-thumb {
     border: none;
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: goldenrod;
+    background: #41ABEF;
 }
 
 /*hide the outline behind the border*/
-input[type=range]:-moz-focusring{
-    outline: 1px solid white;
+input[type=range]:-moz-focusring {
+    /*outline: 1px solid white;*/
     outline-offset: -1px;
 }
 
@@ -204,7 +209,7 @@ input[type=range]::-ms-thumb {
     height: 16px;
     width: 16px;
     border-radius: 50%;
-    background: goldenrod;
+    background: #41abef;
 }
 
 input[type=range]:focus::-ms-fill-lower {
@@ -215,36 +220,64 @@ input[type=range]:focus::-ms-fill-upper {
     background: #ccc;
 }
 
-.btn_icon{
+.btn_icon {
     flex: 1;
     cursor: pointer;
 }
 
-.btn_icon>img{
+.btn_icon > img {
     height: 50px;
 }
 
-#upload{
-    display:none
+#upload {
+    display: none
 }
 
-#textColor{
+#textColor {
     padding: 10px;
     display: flex;
     flex-wrap: nowrap;
 }
 
-#libelle{
+#libelle {
+    width: 80%;
     flex: 3;
     height: 30px;
 }
 
-#couleur{
+#couleur {
     flex: 1;
     height: 30px;
+    width: 60px;
+    margin-left: 10px;
+    border: none;
+
+    box-shadow: inset 1px 1px 17px 7px rgba(65, 171, 239, 0.43);
 }
 
-#btn-delete{
+#btn-delete {
     width: 100%;
     display: inline-flex;
+}
+
+.list {
+    height: 70px;
+    margin: 15px 5px;
+    padding: 15px;
+    background: #dddddd17;
+    font-size: 20px;
+    text-transform: uppercase;
+}
+
+.list:hover {
+    width: 80%;
+    box-shadow: inset 1px 1px 17px 7px rgba(65, 171, 239, 0.43);
+    margin: 30px auto;
+    cursor: pointer;
+}
+
+.listClick {
+    width: 140%;
+    height: 140%;
+    box-shadow: inset 1px 1px 0px 20px rgba(65, 171, 239, 0.43);
 }

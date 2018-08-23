@@ -14,6 +14,8 @@ let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
 let zoomSliderSVG = SVG.adopt(zoomSliderDom);
 let libelleSVG = SVG.adopt(libelle);
 let dElemSVG = SVG.adopt(deleteElem);
+let dPlanSVG = SVG.adopt(deletePlan);
+let VStand = SVG.adopt(viderStand);
 let leftSVGList = null;
 let planSVG = null;
 let centerImages = null;
@@ -220,3 +222,13 @@ let trasformationFunction = function (setArrayOfImages) {
     });
 };
 
+deletePlan.addEventListener("click", function (evt) {
+    document.querySelector('#plan>svg').style.backgroundImage = "";
+    document.querySelector('#upload').value = "";
+});
+
+viderStand.addEventListener("click", function (evt) {
+    document.querySelector('#plan>svg').innerHTML = "";
+    document.querySelector('#plan>svg').style.backgroundImage = "";
+    document.querySelector('#upload').value = "";
+})

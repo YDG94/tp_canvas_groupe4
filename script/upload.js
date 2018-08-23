@@ -5,6 +5,7 @@ let inputUpload = document.querySelector('#upload');
 
 // Fonction pour lire le contenu du fichier uploade
 function readUrl() {
+    console.log("upload");
     let file = document.querySelector('#upload').files[0];
     let reader = new FileReader();
 
@@ -14,12 +15,14 @@ function readUrl() {
             'background-repeat': 'no-repeat',
             'background-size': '100% 100%',
         });
+
     };
 
     if (file) {
         reader.readAsDataURL(file);
     } else {
     }
+
 }
 
 // Branchement du listener onchange
