@@ -4,6 +4,7 @@
 let btn_save = document.querySelector('#btn_save');
 let btn_load = document.querySelector('#btn_load');
 let btn_delete = document.querySelector('#btn_delete');
+let deleteElem = document.getElementById("removeElem");
 
 let rotationSliderDOM = document.querySelector("#degreeController");
 let zoomSliderDom = document.querySelector("#sizeController");
@@ -12,6 +13,8 @@ let libelle = document.querySelector("#libelle");
 let rotationSliderSVG = SVG.adopt(rotationSliderDOM);
 let zoomSliderSVG = SVG.adopt(zoomSliderDom);
 let libelleSVG = SVG.adopt(libelle);
+let dElemSVG = SVG.adopt(deleteElem);
+let myFilter = null;
 /****************************************************************************/
 
 /****************************************************************************/
@@ -43,12 +46,17 @@ let trasformationFunction = function (setArrayOfImages) {
         setArrayOfImages.each(function (i) {
             this.parent().unfilter();
         });
+        if (document.querySelector('#plan filter') != null) {
+            this.parent().attr({
+                filter: "url(#" + document.querySelector('#plan filter').getAttribute("id") + ")"
+            });
+        }else {
+            document.querySelector('#plan defs').innerHTML = '<filter id="SvgjsFilter1039"><feOffset id="SvgjsFeOffset1040" dx="0" dy="3" result="SvgjsFeOffset1040Out" in="SourceAlpha"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1041" stdDeviation="3 3" result="SvgjsFeGaussianBlur1041Out" in="SvgjsFeOffset1040Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1042" in="SourceGraphic" in2="SvgjsFeGaussianBlur1041Out" mode="normal" result="SvgjsFeBlend1042Out"></feBlend></filter>';
+            this.parent().attr({
+                filter: "url(#" + document.querySelector('#plan filter').getAttribute("id") + ")"
+            });
+        }
 
-        this.parent().filter(function (add) {
-            let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
-
-            add.blend(add.source, blur);
-        });
         //rect.move('5%', 0);
         let _this = this;
         /* il faut debrancher le listener pour input sur tous les images
@@ -76,6 +84,11 @@ let trasformationFunction = function (setArrayOfImages) {
                 g.children()[1].text(event.target.value).fill(document.getElementById("couleur").value).y(-25);
             }
         });
+
+        dElemSVG.on("click", function (event) {
+            let g = _this.parent();
+            g.remove();
+        });
     });
 };
 /*************************************************************************************************************/
@@ -84,6 +97,8 @@ let trasformationFunction = function (setArrayOfImages) {
 
 /***************** Liste des fonctions de base pour gérer les sauvgardes et chargements *****************/
 function save(nom_plan) {
+    let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
+
     let p = {
         backgroundImage: document.querySelector("#plan>svg").style.backgroundImage,
         plan: document.querySelector('#plan>svg').innerHTML
@@ -109,7 +124,6 @@ function getSave(nom_plan) {
         let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
         let obj = JSON.parse(myPlan_json);
         planSVG.svg(obj.plan);
-
         console.log((obj.backgroundImage));
         document.querySelector('#plan>svg').style.backgroundImage = obj.backgroundImage;
         document.querySelector('#plan>svg').style.backgroundRepeat = "no-repeat";
@@ -117,7 +131,7 @@ function getSave(nom_plan) {
         let centerImages = planSVG.select('image');
         console.log(centerImages);
         planSVG.select('g').draggable();
-        //trasformationFunction(centerImages);
+        trasformationFunction(centerImages);
     } else {
         if (localStorage.getItem('auto_save') !== null) {
             document.querySelector('#plan>svg').innerHTML = getAutoSave;

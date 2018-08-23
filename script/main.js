@@ -20,7 +20,6 @@ let centerImages = null;
 let leftImages = null;
 const imgSize = 15;
 let tabElementsSvg = svgItems;
-let myFilter = null;
 
 
 let categories = document.querySelector("#catElement");
@@ -152,13 +151,13 @@ let insertFunction = function () {
         let group = planSVG.group();
         let plan = document.getElementById("plan");
         //the image will be created and is chained to animation
-        group.x(0).y(plan.offsetHeight/2);
+        group.x(0).y(plan.offsetHeight / 2);
         group.image(this.attr("href"), "4vh", "4vh");
-        group.text(function(add) {
+        group.text(function (add) {
             add.tspan('');
         });
 
-        group.animate(1500, '<>').dmove(plan.offsetWidth/2, 0).scale(3, 3);
+        group.animate(1500, '<>').dmove(plan.offsetWidth / 2, 0).scale(3, 3);
 
         //we'll immediately get all images and we'll make it DRAGGABLE!
         centerImages = planSVG.select('image');
@@ -176,15 +175,16 @@ let trasformationFunction = function (setArrayOfImages) {
         setArrayOfImages.each(function (i) {
             this.parent().unfilter();
         });
-    if(myFilter === null){
-        this.parent().filter(function (add) {
-            let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
-            add.blend(add.source, blur);
+
+        // this.parent().filter(function (add) {
+        //     let blur = add.offset(0, 3).in(add.sourceAlpha).gaussianBlur(3);
+        //     add.blend(add.source, blur);
+        // });
+        document.querySelector('#plan defs').innerHTML = '<filter id="SvgjsFilter1039"><feOffset id="SvgjsFeOffset1040" dx="0" dy="3" result="SvgjsFeOffset1040Out" in="SourceAlpha"></feOffset><feGaussianBlur id="SvgjsFeGaussianBlur1041" stdDeviation="3 3" result="SvgjsFeGaussianBlur1041Out" in="SvgjsFeOffset1040Out"></feGaussianBlur><feBlend id="SvgjsFeBlend1042" in="SourceGraphic" in2="SvgjsFeGaussianBlur1041Out" mode="normal" result="SvgjsFeBlend1042Out"></feBlend></filter>';
+        this.parent().attr({
+            filter: "url(#" + document.querySelector('#plan filter').getAttribute("id") + ")"
         });
-            myFilter = this.parent().filterer;
-    }else{
-        this.parent().filter(myFilter);
-    }
+
         //rect.move('5%', 0);
         let _this = this;
         /* il faut debrancher le listener pour input sur tous les images
