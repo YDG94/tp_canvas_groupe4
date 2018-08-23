@@ -16,9 +16,13 @@ header {
     height: 70px;
     opacity: 0.5;
     margin: 15px auto;
+    text-align: center;
     -webkit-box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
     -moz-box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
     box-shadow: 0 0 160px -15px rgba(65, 171, 239, 1);
+}
+header>svg{
+    width: 60%;
 }
 
 main {

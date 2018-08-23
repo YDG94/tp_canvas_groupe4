@@ -54,7 +54,7 @@ if (SVG.supported) {
             fill: "#ebebe9",
             family: "Luckiest Guy",
             variant:  "cursive",
-            size: "4.5em",
+            size: "4vw",
         }).stroke({
             color: "rgba(65, 171, 239, 1)",
             width: 3,

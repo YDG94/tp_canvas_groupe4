@@ -85,6 +85,7 @@ let trasformationFunction = function (setArrayOfImages) {
         });
 
         dElemSVG.on("click", function (event) {
+            console.log(_this.parent())
             let g = _this.parent();
             g.remove();
         });
@@ -106,7 +107,13 @@ function save(nom_plan) {
 }
 
 function autoSave() {
-    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan>svg').innerHTML));
+    let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
+
+    let p = {
+        backgroundImage: document.querySelector("#plan>svg").style.backgroundImage,
+        plan: document.querySelector('#plan>svg').innerHTML
+    }
+    localStorage.setItem('auto_save', JSON.stringify(p));
 }
 
 function deleteSave(nom_plan) {
