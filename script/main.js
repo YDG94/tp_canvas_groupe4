@@ -1,5 +1,5 @@
 "use strict";
-import {svgItems, tabCategories, Project, Version, SvgElement} from './struct.js';
+import {svgItems, tabCategories} from './struct.js';
 
 console.log("js loaded");
 let myLeftDivSVG = document.querySelector("#svgContent");

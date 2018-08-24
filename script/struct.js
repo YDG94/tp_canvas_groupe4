@@ -1,28 +1,3 @@
-export class SvgElement {
-    constructor(elemId, elemName, elemDom, versId) {
-        this.elemId = elemId;
-        this.elemName = elemName;
-        this.elemDom = elemDom;
-        this.versId = versId;
-    }
-}
-
-export class Version {
-    constructor(numVers, dateCreation, projectId) {
-        this.numVers = numVers;
-        this.dateCreation = dateCreation;
-        this.projectId = projectId;
-    }
-}
-
-export class Project {
-    constructor(projetId, dateCreation, standImg, userId) {
-        this.projetId = projetId;
-        this.dateCreation = dateCreation;
-        this.standImg = standImg;
-        this.userId = userId;
-    }
-}
 
 export let tabCategories = [
     {name: "All elements", value: "0"},
