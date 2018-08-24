@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>CHOOSE YOUR OWN LIFESTYLE</title>
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
         <link rel="stylesheet" href="style/css.css">
 
         <script>
@@ -13,7 +14,7 @@
     </head>
     <body>
 
-        <header>
+        <header id="header">
 
         </header>
 
@@ -24,10 +25,10 @@
 
                 <input type="text" name="searchElement" id="searchElement" placeholder="Search for an element..."/>
 
-                <select id="catElement" name="catElement">
+                <select id="catElement" name="catElement" class="select">
                 </select>
 
-                <div id="divSvg">
+                <div id="divSvg" class="scrolly">
 
                     <div id="svgContent">
 
@@ -38,7 +39,6 @@
             <section id="center_section">
                 <!--upload plan photo-->
                 <div id="plan">
-
                 </div>
 
             </section>
@@ -49,18 +49,18 @@
 
                 <div id="manageProject">
                     <input id="upload" type="file"/>
-                    <a id="upload_link" class="btn_icon"><img src="images/upload.png"></a>​
-                    <a id="btn_save" class="btn_icon"><img src="images/create.png"></a>
-                    <a id="btn_delete" class="btn_icon"><img src="images/delete.png"></a>
+                    <a id="upload_link" class="btn_icon"><img src="images/upload.png" alt="upload plan icon"></a>​
+                    <a id="btn_save" class="btn_icon"><img src="images/create.png" alt="create plan icon"></a>
+                    <a id="btn_delete" class="btn_icon"><img src="images/delete.png" alt="delete plan icon"></a>
                 </div>
 
-                <div id="projectTree">
+                <div id="projectTree" class="scrolly">
                     <!--upload project tree from js -->
                 </div>
 
                 <h3>Elements properties</h3>
 
-                <div id="elem_prop">
+                <div id="elem_prop" class="scrolly">
                     <label for="sizeController">size</label>
                     <input type="range" min="5" max="15" value="1" id="sizeController" step="1"/>
 
@@ -72,9 +72,9 @@
                         <input type="color" id="couleur" value="#41ABEF"/>
                     </div>
                     <div id="btn-delete">
-                        <a id="removeElem" class="btn_icon"><img src="images/remove-elem.png"/></a>
-                        <a id="removePlan" class="btn_icon"><img src="images/remove-plan.png"/></a>
-                        <a id="viderStand" class="btn_icon"><img src="images/vider-stand.png"/></a>
+                        <a id="removeElem" class="btn_icon"><img src="images/remove-elem.png" alt="remove element icon"/></a>
+                        <a id="removePlan" class="btn_icon"><img src="images/remove-plan.png" alt="remove background icon"/></a>
+                        <a id="viderStand" class="btn_icon"><img src="images/vider-stand.png" alt ="remove all icon"/></a>
                     </div>
                 </div>
             </section>
@@ -85,7 +85,7 @@
         <script src="script/svg.draggable.js"></script>
         <script src="script/svg.filter.js"></script>
         <script src="script/upload.js"></script>
-        <script src="script/storage.js"></script>
         <script type="module" src="script/main.js"></script>
+        <script src="script/storage.js"></script>
     </body>
 </html>

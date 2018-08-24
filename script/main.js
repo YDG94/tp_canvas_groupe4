@@ -16,12 +16,14 @@ let libelleSVG = SVG.adopt(libelle);
 let dElemSVG = SVG.adopt(deleteElem);
 let dPlanSVG = SVG.adopt(deletePlan);
 let VStand = SVG.adopt(viderStand);
+let headerSVG = null;
 let leftSVGList = null;
 let planSVG = null;
 let centerImages = null;
 let leftImages = null;
 const imgSize = 15;
 let tabElementsSvg = svgItems;
+let titleText=null;
 
 
 let categories = document.querySelector("#catElement");
@@ -41,9 +43,31 @@ if (SVG.supported) {
         console.log("DOM loaded!");
 
         //creation of SVGs
+        headerSVG = SVG('header').size('100%', '100%');
         leftSVGList = SVG('svgContent');
         planSVG = SVG('plan');
 
+        //creation of text in Header SVG
+        titleText = headerSVG.plain("Blue Printer").
+        move("15%", "90%").
+        font({
+            fill: "#ebebe9",
+            family: "Luckiest Guy",
+            variant:  "cursive",
+            size: "4vw",
+        }).stroke({
+            color: "rgba(65, 171, 239, 1)",
+            width: 3,
+             }).
+        attr({
+            "stroke-dasharray": "5,7,5",
+            "stroke-dashoffset": 10
+        });
+        console.log("off set is: ", titleText.attr("stroke-dashoffset"));
+        animateTitle();
+
+
+        //insertion images on left SVG
         for (let i = 0; i < tabElementsSvg.length; i++) {
             leftSVGList.image(`images/${tabElementsSvg[i].imgSrc}`, "100%", `${imgSize}vh`).move(0, `${imgSize * i}vh`);
         }
@@ -231,4 +255,22 @@ viderStand.addEventListener("click", function (evt) {
     document.querySelector('#plan>svg').innerHTML = "";
     document.querySelector('#plan>svg').style.backgroundImage = "";
     document.querySelector('#upload').value = "";
-})
+});
+
+//just a simple stupid animation
+function animateTitle(){
+
+    let now = new Date();
+    let sec = now.getSeconds();
+
+    let textOffset = titleText.attr("stroke-dashoffset");
+    if(sec%2 === 0){
+        textOffset++;
+    }
+    if(textOffset === 100)
+        textOffset=0;
+
+    titleText.attr("stroke-dashoffset", textOffset);
+
+    requestAnimationFrame(animateTitle);
+}

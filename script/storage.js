@@ -2,7 +2,6 @@
 
 /******************** Variables et autres DOM elements *********************/
 let btn_save = document.querySelector('#btn_save');
-let btn_load = document.querySelector('#btn_load');
 let btn_delete = document.querySelector('#btn_delete');
 let deleteElem = document.getElementById("removeElem");
 
@@ -85,6 +84,7 @@ let trasformationFunction = function (setArrayOfImages) {
         });
 
         dElemSVG.on("click", function (event) {
+            console.log(_this.parent());
             let g = _this.parent();
             g.remove();
         });
@@ -96,17 +96,19 @@ let trasformationFunction = function (setArrayOfImages) {
 
 /***************** Liste des fonctions de base pour gérer les sauvgardes et chargements *****************/
 function save(nom_plan) {
-    let planSVG = SVG.adopt(document.querySelector('#plan>svg'));
-
     let p = {
         backgroundImage: document.querySelector("#plan>svg").style.backgroundImage,
         plan: document.querySelector('#plan>svg').innerHTML
-    }
+    };
     localStorage.setItem(nom_plan, JSON.stringify(p));
 }
 
 function autoSave() {
-    localStorage.setItem('auto_save', JSON.stringify(document.querySelector('#plan>svg').innerHTML));
+    let p = {
+        backgroundImage: document.querySelector("#plan>svg").style.backgroundImage,
+        plan: document.querySelector('#plan>svg').innerHTML
+    };
+    localStorage.setItem('auto_save', JSON.stringify(p));
 }
 
 function deleteSave(nom_plan) {
